@@ -28,10 +28,10 @@
               <div class="collapse navbar-collapse" id="navbarCollapse">
                 <ul class="navbar-nav me-auto mb-2 mb-md-0">
                   <li class="nav-item">
-                      <a class="nav-link" href="#" th:classappend="${menu} == 'home'? 'active'">홈<span class="sr-only" th:if="${menu} == 'home'">(current)</span></a>
+                      <a class="nav-link" href="#" th:href="@{/}" th:classappend="${menu} == 'home'? 'active'">홈<span class="sr-only" th:if="${menu} == 'home'">(current)</span></a>
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link" href="#" th:classappend="${menu} == 'board'? 'active'" >게시판<span class="sr-only" th:if="${menu} == 'board'">(current)</span></a>
+                    <a class="nav-link" href="#" th:href="@{/list}" th:classappend="${menu} == 'board'? 'active'" >게시판<span class="sr-only" th:if="${menu} == 'board'">(current)</span></a>
                   </li>
                 </ul>
               </div>
