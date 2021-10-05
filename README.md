@@ -1,2 +1,2 @@
 # Myhome
-practice speingboot
+practice springboot
