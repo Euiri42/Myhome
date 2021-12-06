@@ -1,0 +1,344 @@
+
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js" integrity="sha384-W8fXfP3gkOKtndU4JGtKDvXbO53Wy8SZCQHczT5FMiiqmQfUpWbYdTil/SxwZgAN" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.min.js" integrity="sha384-skAcpIdS7UcVUC05LJ9Dxay8AXcDYfBJqt1CJ85S/CFujBsIzCIv+l9liuYLaMQ/" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
+
+
+    <!-- Remember to include jQuery :) -->
+<!--    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>-->
+<!--    &lt;!&ndash; jQuery Modal &ndash;&gt;-->
+<!--    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>-->
+<!--    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css" />-->
+
+    <link href="src/popupwindow.css" rel="stylesheet">
+    <script src="//code.jquery.com/jquery.min.js"></script>
+    <script src="src/popupwindow.js"></script>
+
+    <script th:src="@{/webjars/jquery/jquery.min.js}"></script>
+    <script th:src="@{/webjars/popper.js/umd/popper.min.js}"></script>
+    <script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
+    <script>
+        // Get the modal
+        var modal = document.getElementById("myModal");
+
+        // Get the button that opens the modal
+        var btn = document.getElementsByClassName("myBtn");
+
+        // Get the <span> element that closes the modal
+        var span = document.getElementsByClassName("close")[0];
+
+        // When the user clicks the button, open the modal
+        btn.onclick = function() {
+          modal.style.display = "block";
+        }
+
+        // When the user clicks on <span> (x), close the modal
+        span.onclick = function() {
+          modal.style.display = "none";
+        }
+
+        // When the user clicks anywhere outside of the modal, close it
+        window.onclick = function(event) {
+          if (event.target == modal) {
+            modal.style.display = "none";
+          }
+        }
+    </script>
+    <script>
+    window.onload = function() {
+        $('.btn-req').click(function() {
+            var tr = $(this).parent().parent();
+            var td = tr.children();
+            console.log(tr);
+            var no = td.eq(0).text();
+            var name = td.eq(1).text();
+            console.log(no);
+            console.log(name);
+
+            $.ajax({
+                url: 'http://localhost:8080/mlRequest?name=' + name,
+                type: 'GET',
+                contentType: 'application/x-www-form-urlencoded; charset=UTF-8;',
+                success: function (data) {
+                    console.log('data = ' + data);
+                }
+            });
+        });
+        $('.myBtn').click(function() {
+        // Get the modal
+        var modal = document.getElementById("myModal");
+
+        // Get the button that opens the modal
+        var btn = document.getElementsByClassName("myBtn");
+
+        // Get the <span> element that closes the modal
+        var span = document.getElementsByClassName("close")[0];
+        modal.style.display = "block";
+
+        // When the user clicks on <span> (x), close the modal
+        span.onclick = function() {
+          modal.style.display = "none";
+        }
+
+        // When the user clicks anywhere outside of the modal, close it
+        window.onclick = function(event) {
+          if (event.target == modal) {
+            modal.style.display = "none";
+          }
+        }
+        });
+    };
+</script>
+
+
+    <link href="https://fonts.googleapis.com/css?family=Gugi&amp;subset=korean" rel="stylesheet">
+    <!-- Custom styles for this template -->
+    <link href="carousel.css" th:href="@{/carousel.css}" rel="stylesheet">
+    <link th:rel="stylesheet" th:href="@{/webjars/bootstrap/4.0.0-2/css/bootstrap.min.css} "/>
+
+    <style>
+      body{
+      font-family: 'Gugi', cursive;
+      }
+
+      .bd-placeholder-img {
+        font-size: 1.125rem;
+        text-anchor: middle;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+      }
+
+      @media (min-width: 768px) {
+        .bd-placeholder-img-lg {
+          font-size: 3.5rem;
+        }
+      }
+      form{
+      display:inline
+      }
+
+      footer{
+        text-align: center;
+      }
+      .center1{
+        text-align: center;
+      }
+          /* The Modal (background) */
+    .modal {
+      display: none; /* Hidden by default */
+      position: fixed; /* Stay in place */
+      z-index: 1; /* Sit on top */
+      padding-top: 100px; /* Location of the box */
+      left: 0;
+      top: 0;
+      width: 100%; /* Full width */
+      height: 100%; /* Full height */
+      overflow: auto; /* Enable scroll if needed */
+      background-color: rgb(0,0,0); /* Fallback color */
+      background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+    }
+
+    /* Modal Content */
+    .modal-content {
+      position: relative;
+      background-color: #fefefe;
+      margin: auto;
+      padding: 0;
+      border: 1px solid #888;
+      width: 80%;
+      box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
+      -webkit-animation-name: animatetop;
+      -webkit-animation-duration: 0.4s;
+      animation-name: animatetop;
+      animation-duration: 0.4s
+    }
+
+    /* Add Animation */
+    @-webkit-keyframes animatetop {
+      from {top:-300px; opacity:0}
+      to {top:0; opacity:1}
+    }
+
+    @keyframes animatetop {
+      from {top:-300px; opacity:0}
+      to {top:0; opacity:1}
+    }
+
+    /* The Close Button */
+    .close {
+      color: white;
+      float: right;
+      font-size: 28px;
+      font-weight: bold;
+    }
+
+    .close:hover,
+    .close:focus {
+      color: #000;
+      text-decoration: none;
+      cursor: pointer;
+    }
+
+    .modal-header {
+      padding: 2px 16px;
+      background-color: #5cb85c;
+      color: white;
+    }
+
+    .modal-body {padding: 2px 16px;}
+
+    .modal-footer {
+      padding: 2px 16px;
+      background-color: #5cb85c;
+      color: white;
+
+    .height2{
+        line-height:2;
+    }
+    </style>
+
+    <title>contract list(동의 목록)</title>
+
+</head>
+
+<body>
+<nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top" th:replace="fragments/common :: menu('contract')">
+</nav>
+
+<div class="container">
+    <!--    <h2>게시판</h2>-->
+    <hr class="featurette-divider">
+    <h2>📃 Contracted List </h2>
+    <P>데이터활용 동의 완료된 의료기관↔환자간의 Data List</P>
+    <!-- Trigger/Open The Modal -->
+
+    <!-- Trigger/Open The Modal -->
+
+    <!-- The Modal -->
+    <div id="myModal" class="modal">
+        <!-- Modal content -->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <span class="close">&times;</span>
+                    <h3 th:text="${session.userName}"></h3>
+                </div>
+                <div class="modal-body">
+                    <h3 th:if="${#authorization.expression('isAuthenticated()') and (#strings.contains(#authentication.principal.authorities,'INSTITUTION'))}">✔PATIENT'S RESULTS</h3>
+                    <h3 th:if="${#authorization.expression('isAuthenticated()') and (#strings.contains(#authentication.principal.authorities,'PATIENT'))}">✔MY RESULTS</h3>
+                    <p class = "height2" th:if="${#authorization.expression('isAuthenticated()') and (#strings.contains(#authentication.principal.authorities,'INSTITUTION'))}"><p th:text="${session.patient}"></p></p>
+                    <p th:if="${#authorization.expression('isAuthenticated()') and (#strings.contains(#authentication.principal.authorities,'PATIENT'))}" sec:authentication="name"></p>
+                    <p th:if="${#authorization.expression('isAuthenticated()') and (#strings.contains(#authentication.principal.authorities,'PATIENT'))}">치매 테스트 분석 결과 : <span class='text-danger'>치매</span> 입니다.</p>
+                </div>
+                <div class="modal-footer">
+
+                    <h3 th:if="${#authorization.expression('isAuthenticated()') and (#strings.contains(#authentication.principal.authorities,'PATIENT'))}">나의 치매 분석 결과</h3>
+                    <h3 th:if="${#authorization.expression('isAuthenticated()') and (#strings.contains(#authentication.principal.authorities,'INSTITUTION'))}">해당 환자의 테스트 응답 기록(건강 데이터)</h3>
+                </div>
+            </div>
+        </div>
+
+
+
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th scope="col">Number</th>
+            <th scope="col">Name</th>
+            <th scope="col">Request</th>
+        </tr>
+        </thead>
+        <tbody>
+
+        <tr th:each="contract, iter : ${contractUser}">
+            <td th:text="${iter.index}">0</td>
+            <td><a class="itemList" th:if="${contract.client == #authentication.name}" th:text="${contract.institution}">0</a></td>
+            <td>
+                <button type="button" class="btn btn-primary myBtn btn-req">
+                    Data Analysis Request to
+                </button>
+                <form action="#" th:action="@{/contract/form(id=${contract.id})}" th:object="${contract}" method="post">
+                    <button type="submit" class="btn btn-danger">Withdraw Contract</button>
+                </form>
+            </td>
+        </tr>
+
+        <tr th:each="contract, iter : ${contractInstitution}">
+            <td th:text="${iter.index}">Mark</td>
+            <td><a class="itemList" th:if="${contract.institution == #authentication.name}" th:text="${contract.client}">0</a></td>
+            <td>
+                <!--                <form action="#" th:action="@{/data/patient_data(id=${contract.id})}" th:object="${contract}"method="post">-->
+                <!--                    <button type="submit" class="btn btn-primary btn-req">Request Data</button>-->
+                <!--                </form>-->
+
+
+                <button class="btn btn-primary myBtn btn-req">Data Request</button>
+<!--                <button class="myBtn">Open Modal</button>-->
+
+                <!--                <button class="btn btn-primary btn-req" data-toggle="modal" href="#modal1">-->
+                <!--                    Request Data-->
+                <!--                </button>-->
+
+                <!--                <div th:fragment="modal(id)" class="modal fade" th:id="modal1" tabindex="-1" role="dialog" aria-labelledby="exampleModal"-->
+                <!--                     aria-hidden="true">-->
+                <!--                    <div class="modal-dialog">-->
+                <!--                        <div class="modal-content">-->
+                <!--                            <div class="modal-header">-->
+                <!--                                <h5 class="modal-title" id="exampleModal" >환자의 데이터 결과 조회</h5>-->
+                <!--                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">-->
+                <!--                                    <span aria-hidden="true">&times;</span>-->
+                <!--                                </button>-->
+                <!--                            </div>-->
+                <!--                            <div class="modal-body">-->
+                <!--                                데이터 분석 결과 입니다.-->
+                <!--                            </div>-->
+                <!--                            <div class="modal-footer">-->
+                <!--                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>-->
+                <!--                            </div>-->
+                <!--                        </div>-->
+                <!--                    </div>-->
+                <!--                </div>-->
+
+            </td>
+        </tr>
+
+        </tbody>
+    </table>
+    <nav aria-label="Page navigation example" th:if="${contracts.pageable.pageNumber != 0}">
+        <ul class="pagination justify-content-center" >
+            <li class="page-item" th:classappend="${1 == contracts.pageable.pageNumber + 1} ? 'disabled'">
+                <a class="page-link" href="#"
+                   th:href="@{/contract/list(page=${contracts.pageable.pageNumber - 1},searchText=${param.searchText})}"
+                   tabindex="-1" aria-disabled="true">Previous</a>
+            </li>
+            <li class="page-item" th:classappend="${i == contracts.pageable.pageNumber + 1} ? 'disabled'" th:each="i : ${#numbers.sequence(startPage, endPage)}">
+                <a class="page-link" href="#" th:href="@{/contract/list(page=${i - 1},searchText=${param.searchText})}" th:text="${i}">0</a>
+            </li>
+            <li class="page-item" th:classappend="${contracts.totalPages == contracts.pageable.pageNumber + 1} ? 'disabled'">
+                <a class="page-link" href="#" th:href="@{/contract/list(page=${contracts.pageable.pageNumber + 1},searchText=${param.searchText})}">Next</a>
+            </li>
+        </ul>
+    </nav>
+</div>
+
+
+<!-- FOOTER -->
+<footer class="container">
+    <p>&copy; 2021 Kyungpook National University, Computer Engineering. &middot; <a href="#">Developers</a> &middot; <a href="#">Email</a></p>
+</footer>
+
+</body>
+</html>

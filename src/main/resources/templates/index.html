@@ -1,5 +1,5 @@
 <!doctype html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
   <head>
     <!-- Required meta tags -->
     <meta charset="utf-8">
@@ -13,6 +13,7 @@
     <link href="https://fonts.googleapis.com/css?family=Gugi&amp;subset=korean" rel="stylesheet">
     <!-- Custom styles for this template -->
     <link href="carousel.css" th:href="@{/carousel.css}" rel="stylesheet">
+
 
     <style>
       body{
@@ -38,31 +39,149 @@
       footer{
         text-align: center;
       }
+      .center1{
+        text-align: center;
+      }
+
+      .title{
+        color:#50BCDF;
+      }
+
+      .sub-title{
+        color:#8AE634;
+      }
+
+      .slide_box{
+        width:80%;
+        margin-top:60px;
+      }
+
+      .margin_top{
+        margin-top:80px;
+        }
 
     </style>
 
-    <title>Hello, Springboot!</title>
+    <title>I-HIMS(Intelligent Health data Integration & Management System) | HOME </title>
 
   </head>
 
 <body>
-    
+
     <header>
         <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark" th:replace="fragments/common :: menu('home')">
         </nav>
       </header>
-            
-      <!-- Begin page content -->
-      <main class="flex-shrink-0">
-        <div class="container">
-          <h1 class="mt-5">Sticky footer with fixed navbar</h1>
-          <p class="lead">Pin a footer to the bottom of the viewport in desktop browsers with this custom HTML and CSS. A fixed navbar has been added with <code class="small">padding-top: 60px;</code> on the <code class="small">main &gt; .container</code>.</p>
-          <p>Back to <a href="/docs/5.1/examples/sticky-footer/">the default sticky footer</a> minus the navbar.</p>
+
+        <!-- START THE FEATURETTES -->
+    <div class="center1">
+        <center><div id="carouselExampleDark" class="carousel carousel-dark slide slide_box" data-bs-ride="carousel">
+            <div class="carousel-indicators">
+                <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="2" aria-label="Slide 3"></button>
+            </div>
+            <div class="carousel-inner">
+                <div class="carousel-item active" data-bs-interval="3000">
+                    <img th:src="@{images/slide1.png}" class="d-block w-30" alt="...">
+                    <div class="carousel-caption d-none d-md-block">
+                        <h5>01</h5>
+                        </div>
+                </div>
+                <div class="carousel-item" data-bs-interval="3000">
+                    <img th:src="@{images/slide2.png}" class="d-block w-30" alt="...">
+                    <div class="carousel-caption d-none d-md-block">
+                        <h5>02</h5>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <img th:src="@{images/slide3.png}" class="d-block w-30" alt="...">
+                    <div class="carousel-caption d-none d-md-block">
+                        <h5>03</h5>
+                        </div>
+                </div>
+            </div>
+
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleDark" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleDark" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
         </div>
-      </main>
+        </center>
+
+                <h2 class="title">Welcome to I-HIMS!</h2>
+                <span class="text-muted">건강 데이터 통합 관리 시스템( Intelligent Health data Integration & Management System )</span>
+
+                        <h3 class="margin_top">📌 I-HIMS 란?</h3>
+                        <p>I-HIMS는  정보 제공 주체인 개인이
+                            흩어져 있는 자신의 의료 데이터를 통합하여
+                            관리할 수 있도록 한 웹 기반 FHIR 를 활용한 통합건강관리시스템입니다.</p>
+                    <h3>📌 FHIR 란?</h3>
+                         <p>상호운용성*을 지원하여 기존 임상정보 문서교환 표준의 단점을 보완한 차세대  문서 교환 기술 입니다.</p>
+                        <p>
+                        * 상호운용성 : 하나의 시스템이 동일 또는 이기종의
+                        다른 시스템과 아무런 제약 없이 서로 호환되어 사용할 수
+                        있는 성질을 말합니다.
+                        </p>
+                        <hr>
+                        <h3 class="margin_top">What to do?</h3>
+                        <P> 🌟 언제 어디서나 자신의 건강 데이터에 접근할 수 있는 통합 관리 플랫폼 개발</P>
+                        <P> 🌟 병원에서 받은 진료기록, 검사영상, 처방이력 등을 저장</P>
+                        <P> 🌟 진료 참조 및 건강 관리 등 자신의 건강 데이터를 원하는 곳에 활용</P>
+                        <P> 🌟 환자의 동의기반 시스템 구성</P>
+        <br>
+        <br>
+        <br>
+
+
+
+
+
+        <section class="features-icons bg-light text-center">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-4">
+                        <div class="features-icons-item m_mx-auto m_mb-5 m_mb-lg-0 m_mb-lg-3">
+                            <div class="features-icons-icon m_d-flex"><i class="m_bi-window m_m-auto m_text-primary"></i></div>
+                            <img th:src="@{images/medical-history.png}" width="100" height="100" border="0">
+                            <br><br>
+
+                            <p class="m_lead mb-0">병원에서 받은 진료기록,</p>
+                            <p class="m_lead mb-0">검사영상, 처방이력 등을 저장</p>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="features-icons-item m_mx-auto m_mb-5 m_mb-lg-0 m_mb-lg-3">
+                            <div class="features-icons-icon m_d-flex"><i class="m_bi-layers m_m-auto m_text-primary"></i></div>
+                            <img th:src="@{images/data-sharing.png}" width="100" height="100" border="0">
+                            <br><br>
+
+                            <p class="lead mb-0">진료 참조 및 건강 관리 등 </p>
+                            <p class="lead mb-0">자신의 건강 데이터를 원하는 곳에 활용</p>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="features-icons-item m_mx-auto m_mb-0 m_mb-lg-3">
+                            <div class="features-icons-icon m_d-flex"><i class="bi-terminal m-auto text-primary"></i></div>
+                            <img th:src="@{images/agree.png}" width="100" height="100" border="0">
+                            <br><br>
+
+                            <p class="lead mb-0">환자의 동의기반 시스템 구성</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <hr class="featurette-divider">
+    </div><!-- /.container -->
+
       <!-- FOOTER -->
         <footer class="container">
-          <p>&copy; 2017–2021 Company, Inc. &middot; <a href="#">Privacy</a> &middot; <a href="#">Terms</a></p>
+          <p>&copy; 2021 Kyungpook National University, Computer Science & Engineering. &middot; <a href="https://github.com/POHR-PesrsonOwnedHealthRecord">Developers</a> &middot; <a href="mailto:youngcool0.0@gmail.com?subject=메일 작성">Email</a></p>
         </footer>
 </body>
 </html>

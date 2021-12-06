@@ -1,0 +1,134 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js" integrity="sha384-W8fXfP3gkOKtndU4JGtKDvXbO53Wy8SZCQHczT5FMiiqmQfUpWbYdTil/SxwZgAN" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.min.js" integrity="sha384-skAcpIdS7UcVUC05LJ9Dxay8AXcDYfBJqt1CJ85S/CFujBsIzCIv+l9liuYLaMQ/" crossorigin="anonymous"></script>
+    <link href="https://fonts.googleapis.com/css?family=Gugi&amp;subset=korean" rel="stylesheet">
+    <!-- Custom styles for this template -->
+    <link href="carousel.css" th:href="@{/carousel.css}" rel="stylesheet">
+
+
+    <style>
+      body{
+      font-family: 'Gugi', cursive;
+      }
+
+      .bd-placeholder-img {
+        font-size: 1.125rem;
+        text-anchor: middle;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+      }
+
+      @media (min-width: 768px) {
+        .bd-placeholder-img-lg {
+          font-size: 3.5rem;
+        }
+      }
+
+
+      footer{
+        text-align: center;
+      }
+      .center1{
+        text-align: center;
+      }
+
+    </style>
+
+    <title>request(데이터 요청)</title>
+
+</head>
+
+<body>
+
+<header>
+    <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark" th:replace="fragments/common :: menu('request')">
+    </nav>
+</header>
+
+<div class="container">
+    <!--    <h2>Database</h2>-->
+    <h2></h2>
+    <hr class="featurette-divider">
+    <h2>📃 데이터 요청 목록</h2>
+    <P>아래 의료기관으로부터 데이터 요청 받았습니다.</P>
+    <form class="form-inline d-flex justify-content-end" method="GET" th:action="@{/request/list}">
+        <div class="form-group mx-sm-3 mb-2">
+            <input type="text" class="form-control" id="searchText" name="searchText"
+                   th:value="${param.searchText}">
+        </div>
+        <div class="col-auto">
+            <button type="submit" class="btn btn-outline-secondary mb-3">검색</button>
+        </div>
+    </form>
+
+    <table class="table">
+        <thead class="thead-light" sec:authorize="isAuthenticated()" style="text-align:center">
+        <tr>
+            <th scope="col" ></th>
+            <th scope="col" >Name</th>
+            <th scope="col" >Accept/Deny</th>
+        </tr>
+        </thead>
+
+        <tbody>
+
+        <tr th:each="users, iter : ${searchList}" style="text-align:center">
+
+            <td td th:if="${users.client == #authentication.name}" th:text="${iter.index}">0</td>
+
+            <td td th:if="${users.client == #authentication.name}"><a th:text="${users.institution}">Name</a></td>
+
+            <td td th:if="${users.client == #authentication.name}">
+
+                <form action="#" data-th-action="@{/request/edit(id=${users.id}, client=${#authentication.name}, institution=${users.institution})}" data-th-object="${contract}" method="post">
+                    <button class="btn btn-primary" type="submit" name="action" value="save">Accept</button>
+                    <button class="btn btn-danger" type="submit" name="action" value="cancel">Deny</button>
+                </form>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+    <nav aria-label="Page navigation example" th:if="${searchList.pageable.pageNumber != 0}">
+        <ul class="pagination justify-content-center">
+            <li class="page-item" th:classappend="${1 == searchList.pageable.pageNumber + 1} ? 'disabled'">
+                <a class="page-link" href="#"
+                   th:href="@{/request/list(page=${searchList.pageable.pageNumber - 1},searchText=${param.searchText})}"
+                   tabindex="-1" aria-disabled="true">Previous</a>
+            </li>
+            <li class="page-item" th:classappend="${i == searchList.pageable.pageNumber + 1} ? 'disabled'" th:each="i : ${#numbers.sequence(startPage, endPage)}">
+                <a class="page-link" href="#" th:href="@{/request/list(page=${i - 1},searchText=${param.searchText})}" th:text="${i}">1</a>
+            </li>
+            <li class="page-item" th:classappend="${searchList.totalPages == searchList.pageable.pageNumber + 1} ? 'disabled'">
+                <a class="page-link" href="#" th:href="@{/request/list(page=${searchList.pageable.pageNumber + 1},searchText=${param.searchText})}">Next</a>
+            </li>
+        </ul>
+    </nav>
+</div>
+<!--<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"-->
+<!--        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"-->
+<!--        crossorigin="anonymous"></script>-->
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+        crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
+        integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
+        crossorigin="anonymous"></script>
+
+<!-- FOOTER -->
+<footer class="container">
+    <p>&copy; 2021 Kyungpook National University, Computer Engineering. &middot; <a href="#">Developers</a> &middot; <a href="#">Email</a></p>
+</footer>
+</body>
+</html>

@@ -1,0 +1,23 @@
+<html>
+<head>
+  <script src="https://d3js.org/d3.v5.js"></script>
+</head>
+<body>
+<svg id='chart1'>
+</svg>
+<script>
+            var chart1_data_lst = {{circle_data_lst|tojson}} ;
+            var chart1 = d3.select('#chart1').attr('width', 750).attr('height', 750);
+
+            chart1.selectAll('circle').data(chart1_data_lst)
+            .enter().append("circle")
+            .attr('cx', function (d) { return d['cx'] })
+            .attr('cy', function (d) { return d['cy'] })
+            .attr('r', function (d) { return d['r'] })
+            .attr('fill', function (d) { return d['fill'] })
+            .attr('stroke', function (d) { return d['stroke']})
+            .attr('stroke-width', function (d) { return d['stroke-width'] })
+            .attr('fill-opacity', function (d) { return d['fill-opacity']})
+        </script>
+</body>
+</html>

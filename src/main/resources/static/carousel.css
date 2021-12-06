@@ -6,8 +6,28 @@ body {
     padding-top: 3rem;
     padding-bottom: 3rem;
     color: #5a5a5a;
+    font-family: 'Gugi', cursive;
   }
-  
+.bd-placeholder-img {
+          font-size: 1.125rem;
+          text-anchor: middle;
+          -webkit-user-select: none;
+          -moz-user-select: none;
+          -ms-user-select: none;
+          user-select: none;
+        }
+
+        @media (min-width: 768px) {
+          .bd-placeholder-img-lg {
+            font-size: 3.5rem;
+          }
+        }
+
+
+        footer{
+          text-align: center;
+        }
+
   
   /* CUSTOMIZE THE CAROUSEL
   -------------------------------------------------- */

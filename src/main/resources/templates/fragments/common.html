@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <!-- Required meta tags -->
     <meta charset="utf-8">
@@ -15,28 +15,51 @@
     <!-- Custom styles for this template -->
     <link href="carousel.css" th:href="@{/carousel.css}" rel="stylesheet">
     
-    <title th:text="${title}">Hello, Springboot!</title>
+    <title th:text="${title}">I-HIMS(Intelligent Health data Integration & Management System)</title>
   </head>
   <body>
   
         <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark" th:fragment="menu(menu)">
             <div class="container-fluid">
-              <a class="navbar-brand" href="#" th:href="@{/}">Springboot Practice</a>
+              <a class="navbar-brand" href="#" th:href="@{/}"><img src="#" th:src="@{/images/logo0.png}" width="200px" height="70px"></a>
               <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
               </button>
               <div class="collapse navbar-collapse" id="navbarCollapse">
-                <ul class="navbar-nav me-auto mb-2 mb-md-0">
+                <ul class="navbar-nav me-auto">
                   <li class="nav-item">
-                      <a class="nav-link" href="#" th:href="@{/}" th:classappend="${menu} == 'home'? 'active'">홈<span class="sr-only" th:if="${menu} == 'home'"></span></a>
+                      <a class="nav-link" href="#" th:href="@{/}" th:classappend="${menu} == 'home'? 'active'">HOME<span class="sr-only" th:if="${menu} == 'home'"></span></a>
                   </li>
                   <li class="nav-item">
                     <a class="nav-link" href="#" th:href="@{/list}" th:classappend="${menu} == 'board'? 'active'" >게시판<span class="sr-only" th:if="${menu} == 'board'"></span></a>
                   </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" th:href="@{/dataset/list}" th:if="${#authorization.expression('isAuthenticated()') and (#strings.contains(#authentication.principal.authorities,'INSTITUTION'))}"
+                           th:classappend="${menu} == 'dataset'? 'active'" id="dropdown01" data-toggle="dropdown"
+                           aria-haspopup="true" aria-expanded="false">Dataset<span class="sr-only" th:if="${menu} == 'dataset'"></span></a>
+                        <div class="dropdown-menu" aria-labelledby="dropdown01">
+                            <a class="dropdown-item" href="#" th:href="@{/dataset/list}">Search <span class="sr-only" th:if="${menu} == 'dataset'">(current)</span></a>
+                        </div>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" th:classappend="${menu} == 'request'? 'active'" href="#" th:href="@{/request/list}" th:if="${#authorization.expression('isAuthenticated()') and (#strings.contains(#authentication.principal.authorities,'PATIENT'))}">Request</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" th:classappend="${menu} == 'contract'? 'active'" href="#" th:href="@{/contract/list}" th:if="${ #authorization.expression('isAuthenticated()') and (#strings.contains(#authentication.principal.authorities,'INSTITUTION') or #strings.contains(#authentication.principal.authorities,'PATIENT'))}">Contract</a>
+                    </li>
                 </ul>
+                <a class="nav-link my-2 my-sm-0 text-white" th:href="@{/account/login}"
+                sec:authorize="!isAuthenticated()" > 로그인</a>
+                <form class="form-inline my-2 my-lg-0" th:action="@{/logout}" method="POST" sec:authorize="isAuthenticated()">
+                  <span class="text-white" sec:authentication="name">사용자</span>
+                  <span class="text-white mx-2" sec:authentication="principal.authorities">권한</span>
+                  <button class="btn btn-light nav-link my-2 my-sm-0 text-black" type="submit">로그아웃</button>
+                </form>
               </div>
             </div>
         </nav>
+
+        
   </body>
   
 </html>
